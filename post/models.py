@@ -1,6 +1,6 @@
 
 from django.db import models
-from common.models import Profile
+from common.models import User
 
 
 
@@ -9,13 +9,13 @@ ONLY_ME = "Only_me"
 FRIENDS = "Friends"
 POST_TYPE = (
     (PUBLIC, "Public"),
-    (ONLY_ME, "Only_me")
+    (ONLY_ME, "Only_me"),
     (FRIENDS, "Friends"),
 )
 
 
 class Post(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to = "post_images/")
     file = models.FileField(upload_to = "post_files/")
     content = models.TextField()
@@ -23,7 +23,7 @@ class Post(models.Model):
     
 
     type = models.CharField(max_length=64, choices=POST_TYPE)
-    visible_for_profiles = models.ManyToManyField(Profile, related_name="visible_profiles")
+    visible_for_users = models.ManyToManyField(User, related_name="visible_profiles", blank=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

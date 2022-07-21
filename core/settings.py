@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'common',
     'post',
-    'messages',
+    'message',
 ]
 
 MIDDLEWARE = [
