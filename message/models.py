@@ -22,7 +22,9 @@ class Chat(models.Model):
     mute_for = models.CharField(max_length=64, choices=MUTE_CHOICES)
     
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)    
+    
+    active_at = models.DateTimeField(auto_now=True)
     
     def create_message(self,content):
         message = Message.objects.create(chat=self,content = content)
